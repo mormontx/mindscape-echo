@@ -1,0 +1,261 @@
+/* MindfulEcho: The Digital Mindscape */
+
+:root {
+    /* Color Palette - Deep Void */
+    --bg-color: #050505;
+    --grid-line: rgba(255, 255, 255, 0.05);
+    --text-main: #e0e0e0;
+    --text-dim: #555;
+
+    /* Holographic Accents */
+    --accent-cyan: #00f3ff;
+    --accent-pink: #ff00ff;
+    --accent-glitch: #00ff41;
+
+    /* Typography */
+    --font-philo: 'Cinzel', serif;
+    --font-tech: 'JetBrains Mono', monospace;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-tech);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Grid Effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Scanline Overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15) 0px,
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 999;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-philo);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s;
+}
+
+a:hover {
+    text-shadow: 2px 0 var(--accent-cyan), -2px 0 var(--accent-pink);
+    color: #fff;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    border-bottom: 1px solid var(--grid-line);
+    padding-bottom: 1rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.logo {
+    font-size: 2.5rem;
+    border: 1px solid var(--text-main);
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+
+.meta-status {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.meta-status::before {
+    content: "●";
+    color: var(--accent-glitch);
+    margin-right: 0.5rem;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Canvas Grid (Masonry-ish) */
+.canvas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Story Node */
+.story-node {
+    border: 1px solid var(--grid-line);
+    background: rgba(10, 10, 10, 0.8);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.story-node::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.story-node:hover {
+    border-color: var(--text-dim);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.story-node:hover::before {
+    transform: scaleX(1);
+}
+
+.node-meta {
+    font-family: var(--font-tech);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.node-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.node-excerpt {
+    font-family: var(--font-tech);
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.node-link {
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+}
+
+.node-id {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 3rem;
+    font-family: var(--font-philo);
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Post Detail */
+.detail-view {
+    max-width: 800px;
+    margin: 0 auto;
+    border-left: 1px solid var(--grid-line);
+    padding-left: 4rem;
+}
+
+.detail-meta {
+    font-family: var(--font-tech);
+    color: var(--accent-cyan);
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.detail-content p {
+    font-family: var(--font-tech);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+    text-align: justify;
+}
+
+.detail-content p:first-of-type::first-letter {
+    font-family: var(--font-philo);
+    font-size: 4rem;
+    float: left;
+    line-height: 0.8;
+    margin-right: 1rem;
+    color: var(--text-main);
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 3rem;
+    font-family: var(--font-tech);
+    font-size: 0.8rem;
+}
