@@ -42,3 +42,27 @@ window.posts = [
     `
   }
 ];
+
+// Static Pages Data
+window.pages = {
+  about: {
+    title: 'About The Void',
+    content: `
+      <p>Void Aetheria is a digital sanctuary for thoughts that drift between reality and the void. It is a collection of fragments, a database of feelings, and a mirror for the digital soul.</p>
+      <p>We explore the intersection of technology, consciousness, and the quiet despair of the modern condition. Each post is a node in a larger network of understanding.</p>
+      <p>This project was built with a minimalist philosophy: no trackers, no ads, just pure text and code.</p>
+    `
+  },
+  support: {
+    title: 'Support The System',
+    content: `
+      <p>The server costs are paid in memories, but unfortunately, the hosting provider accepts only fiat currency.</p>
+      <p>If you find value in these archives, consider supporting the maintenance of this digital space.</p>
+      <p>You can transmit credits to the following address:</p>
+      <p style="font-family: var(--font-tech); background: rgba(255,255,255,0.1); padding: 1rem; border: 1px dashed var(--accent-glitch);">
+        0x71C7656EC7ab88b098defB751B7401B5f6d8976F
+      </p>
+      <p>Or simply share these echoes with another conscious entity.</p>
+    `
+  }
+};

@@ -1,4 +1,4 @@
-/* MindfulEcho: The Digital Mindscape */
+/* Void Aetheria: The Digital Mindscape */
 
 :root {
     /* Color Palette - Deep Void */
@@ -107,12 +107,6 @@ header {
     align-items: flex-end;
 }
 
-.logo {
-    font-size: 2.5rem;
-    border: 1px solid var(--text-main);
-    padding: 0.5rem 1rem;
-    display: inline-block;
-}
 
 .meta-status {
     font-size: 0.8rem;
@@ -135,6 +129,22 @@ header {
 
     50% {
         opacity: 0;
+    }
+}
+
+.fade-void {
+    animation: fadeVoid 6s ease-in-out infinite;
+}
+
+@keyframes fadeVoid {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
     }
 }
 

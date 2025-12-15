@@ -1,5 +1,6 @@
 // MindfulEcho Application Logic
 const posts = window.posts;
+const pages = window.pages;
 
 const app = document.getElementById('app');
 
@@ -19,6 +20,14 @@ function router() {
     } else {
       renderNotFound();
     }
+  } else if (hash.startsWith('#/')) {
+    const pageId = hash.substring(2); // 'about' or 'support'
+    if (pages[pageId]) {
+      renderPage(pages[pageId]);
+      window.scrollTo(0, 0);
+    } else {
+      renderNotFound();
+    }
   } else {
     renderNotFound();
   }
@@ -27,9 +36,11 @@ function router() {
 // Components
 const Header = () => `
   <header>
-    <div class="logo">
-      ND_SCAPE
-    </div>
+    <nav style="font-family: var(--font-tech); font-size: 0.8rem;">
+      <a href="#/" style="margin-right: 1.5rem;">[ HOME ]</a>
+      <a href="#/about" style="margin-right: 1.5rem;">[ ABOUT ]</a>
+      <a href="#/support">[ SUPPORT ]</a>
+    </nav>
     <div class="meta-status">
       SYSTEM STATUS: ONLINE
     </div>
@@ -38,7 +49,7 @@ const Header = () => `
 
 const Footer = () => `
   <footer style="margin-top: 6rem; padding: 2rem 0; border-top: 1px solid var(--grid-line); font-family: var(--font-tech); font-size: 0.7rem; color: var(--text-dim); display: flex; justify-content: space-between;">
-    <div>&copy; ${new Date().getFullYear()} MINDFUL_ECHO_PROJECT</div>
+    <div>&copy; ${new Date().getFullYear()} VOID_AETHERIA_PROJECT</div>
     <div>/ END_OF_LINE</div>
   </footer>
 `;
@@ -66,7 +77,7 @@ function renderHome() {
     <div class="container">
       ${Header()}
       <section style="margin-bottom: 4rem;">
-        <h1 style="font-size: 4rem; margin-bottom: 0.5rem;">Mindscape <span style="font-size: 1rem; vertical-align: middle; color: var(--accent-cyan);">// v.2.0.45</span></h1>
+        <h1 style="font-size: 4rem; margin-bottom: 0.5rem;" class="fade-void">Void Aetheria <span style="font-size: 1rem; vertical-align: middle; color: var(--accent-cyan);">// v.2.0.45</span></h1>
         <p style="font-family: var(--font-tech); color: var(--text-dim); max-width: 600px;">
           > ACCESSING ARCHIVES...<br>
           > FRAGMENTS OF CONSCIOUSNESS DETECTED.<br>
@@ -102,6 +113,27 @@ function renderPost(post) {
       ${Footer()}
     </div>
   `;
+}
+
+function renderPage(page) {
+  app.innerHTML = `
+      <div class="container">
+        ${Header()}
+        <main class="detail-view">
+          <header style="margin-bottom: 4rem;">
+            <div class="detail-meta">
+              // SYSTEM_INFO: STATIC_PAGE
+            </div>
+            <h1 style="font-size: 3.5rem; line-height: 1; text-shadow: 0 0 10px rgba(255,255,255,0.2);">${page.title}</h1>
+          </header>
+  
+          <article class="detail-content">
+            ${page.content}
+          </article>
+        </main>
+        ${Footer()}
+      </div>
+    `;
 }
 
 function renderNotFound() {
